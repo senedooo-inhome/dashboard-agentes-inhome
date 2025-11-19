@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import * as XLSX from 'xlsx';
 import { getMonthDateRange, downloadCSV } from '../utils/helpers';
@@ -20,8 +21,8 @@ import { LogOut, Download, RefreshCw, Filter } from 'lucide-react';
 interface DashboardProps {
   agentId: string;
   onLogout: () => void;
-  canManageFiles?: boolean;
 }
+
 
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
@@ -95,11 +96,11 @@ const formatDuration = (value?: string) => {
   return `${mm}:${ss}`;
 };
 
-const Dashboard: React.FC<DashboardProps> = ({
-  agentId,
-  onLogout,
-  canManageFiles,
-}) => {
+const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
+
+  const supervisorIds = ["517", "307"];
+  const canManageFiles = supervisorIds.includes(agentId.toString());
+
   const [allData, setAllData] = useState<CallRecord[]>([]);
   const [data, setData] = useState<CallRecord[]>([]);
   const [loading, setLoading] = useState(false);
