@@ -207,9 +207,22 @@ const Dashboard: React.FC<DashboardProps> = ({
           return rec;
         });
 
-        console.log('Total de registros lidos do Excel:', parsed.length);
+console.log('Total de registros lidos do Excel:', parsed.length);
 
-        setAllData(parsed);
+// guarda na memória da aplicação
+setAllData(parsed);
+
+// 👇 salva no navegador para não precisar fazer upload novamente
+try {
+  localStorage.setItem('callData', JSON.stringify(parsed));
+  localStorage.setItem(
+    'callData:lastUpdated',
+    new Date().toISOString()
+  );
+} catch (err) {
+  console.error('Erro ao salvar no localStorage:', err);
+}
+
       } catch (err) {
         console.error('Erro ao ler o arquivo Excel:', err);
       } finally {
