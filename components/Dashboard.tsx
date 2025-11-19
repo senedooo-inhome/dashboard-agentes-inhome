@@ -26,6 +26,33 @@ interface DashboardProps {
 const EXCEL_URL =
   'https://docs.google.com/spreadsheets/d/12AnC2ureIEWxLoKbH6Yb2bSvyECDE39jIH6e_f9eJ2E/export?format=xlsx';
 
+// ======================= LINKS GERAIS DO SISTEMA =======================
+// 👉 AQUI VOCÊ ALTERA / ADICIONA LINKS GERAIS VISÍVEIS PARA TODOS OS AGENTES
+const LINK_PLAYBOOK =
+  'https://sites.google.com/view/playbook-in-home?usp=sharing';
+
+const LINK_CAMPANHAS =
+  'https://agentes-sonax.vercel.app/campanhas';
+// ======================================================================
+
+// =========== LINKS ESPECÍFICOS POR RAMAL (MONITORIA / ESCALA) ===========
+// 👉 ADICIONE NOVOS RAMAIS AQUI QUANDO TIVER LINKS INDIVIDUAIS
+
+// Monitoria de Qualidade por ramal
+const MONITORIA_LINKS: Record<string, string> = {
+  '514': 'https://sonax.bitrix24.com.br/~CZY33', // Monitoria – Ramal 514
+  // '523': 'https://link-da-monitoria-ramal-523',
+  // '512': 'https://link-da-monitoria-ramal-512',
+};
+
+// Escala por ramal
+const ESCALA_LINKS: Record<string, string> = {
+  '514':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=593007587&single=true',
+  // '523': 'https://link-da-escala-ramal-523',
+  // '512': 'https://link-da-escala-ramal-512',
+};
+// =======================================================================
 
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
@@ -158,6 +185,12 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
   const supervisorIds = ['517', '307'];
   const canManageFiles = supervisorIds.includes(agentId.toString());
 
+  // ====== LINKS ESPECÍFICOS DO AGENTE LOGADO (MONITORIA / ESCALA) ======
+  // Se quiser adicionar novos, basta configurar em MONITORIA_LINKS / ESCALA_LINKS lá em cima
+  const monitoriaUrl = MONITORIA_LINKS[agentId];
+  const escalaUrl = ESCALA_LINKS[agentId];
+  // =====================================================================
+
   const [allData, setAllData] = useState<CallRecord[]>([]);
   const [data, setData] = useState<CallRecord[]>([]);
   const [loading, setLoading] = useState(false);
@@ -284,7 +317,10 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
       try {
         await loadFromOnline();
       } catch (err) {
-        console.error('Erro ao carregar Excel online, tentando localStorage:', err);
+        console.error(
+          'Erro ao carregar Excel online, tentando localStorage:',
+          err
+        );
         loadFromLocalStorage();
       } finally {
         setLoading(false);
@@ -543,7 +579,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         {/* Controls */}
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-8 flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
             <div className="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-lg border border-gray-200">
               <Filter className="h-4 w-4 text-gray-400" />
@@ -609,17 +645,66 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             )}
           </div>
 
-          {/* Botão Baixar CSV – só pra quem pode também */}
-          {canManageFiles && (
-            <button
-              onClick={handleExport}
-              disabled={data.length === 0}
-              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium w-full sm:w-auto justify-center"
+          {/* ===== ÁREA DE LINKS RÁPIDOS (PLAYBOOK / CAMPANHAS / MONITORIA / ESCALA) ===== */}
+          {/* 👉 SE PRECISAR ADICIONAR MAIS LINKS GERAIS OU POR RAMAL, VEJA AS CONSTANTES NO TOPO DO ARQUIVO */}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* PlayBook – link geral */}
+            <a
+              href={LINK_PLAYBOOK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-sm bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <Download className="h-4 w-4" />
-              Baixar CSV
-            </button>
-          )}
+              PlayBook
+            </a>
+
+            {/* Campanhas – link geral */}
+            <a
+              href={LINK_CAMPANHAS}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs sm:text-sm bg-indigo-600 text-white px-3 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              Campanhas
+            </a>
+
+            {/* Monitoria – aparece só se existir link para o ramal logado */}
+            {monitoriaUrl && (
+              <a
+                href={monitoriaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm bg-green-600 text-white px-3 py-2 rounded-lg hover:bg-green-700 transition-colors"
+              >
+                Monitoria
+              </a>
+            )}
+
+            {/* Escala – aparece só se existir link para o ramal logado */}
+            {escalaUrl && (
+              <a
+                href={escalaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm bg-purple-600 text-white px-3 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+              >
+                Escala
+              </a>
+            )}
+
+            {/* Botão Baixar CSV – só pra quem pode também */}
+            {canManageFiles && (
+              <button
+                onClick={handleExport}
+                disabled={data.length === 0}
+                className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm font-medium"
+              >
+                <Download className="h-4 w-4" />
+                Baixar CSV
+              </button>
+            )}
+          </div>
+          {/* ========================================================================== */}
         </div>
 
         {/* Summary Cards */}
