@@ -131,6 +131,21 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
   // ---------- Restauração automática do localStorage ----------
   useEffect(() => {
     try {
+      // Restaura mês/ano usados por último
+      const savedYear = localStorage.getItem('callData:selectedYear');
+      const savedMonth = localStorage.getItem('callData:selectedMonth');
+
+      if (savedYear) {
+        const y = Number(savedYear);
+        if (!Number.isNaN(y)) setSelectedYear(y);
+      }
+
+      if (savedMonth) {
+        const m = Number(savedMonth);
+        if (!Number.isNaN(m)) setSelectedMonth(m);
+      }
+
+      // Restaura o Excel
       const saved = localStorage.getItem('callData');
       if (saved) {
         const parsed = JSON.parse(saved);
@@ -142,12 +157,26 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           );
           setAllData(parsed);
           setFileName('Carregado automaticamente (localStorage)');
+        } else {
+          console.log('Nenhum registro válido encontrado no localStorage.');
         }
+      } else {
+        console.log('Nenhum callData encontrado no localStorage.');
       }
     } catch (err) {
       console.error('Erro ao restaurar do localStorage:', err);
     }
   }, []);
+
+  // ---------- Salva mês/ano no localStorage quando mudar ----------
+  useEffect(() => {
+    try {
+      localStorage.setItem('callData:selectedYear', String(selectedYear));
+      localStorage.setItem('callData:selectedMonth', String(selectedMonth));
+    } catch (err) {
+      console.error('Erro ao salvar filtros no localStorage:', err);
+    }
+  }, [selectedYear, selectedMonth]);
 
   // --------- Leitura do Excel local ----------
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -240,6 +269,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             'callData:lastUpdated',
             new Date().toISOString()
           );
+          console.log('✔️ Excel salvo no localStorage.');
         } catch (err) {
           console.error('Erro ao salvar no localStorage:', err);
         }
@@ -255,6 +285,8 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
   // --------- Filtro por agente + mês/ano ----------
   useEffect(() => {
+    console.log('Reaplicando filtros. Total allData:', allData.length);
+
     if (!allData.length) {
       setData([]);
       return;
@@ -300,6 +332,11 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
       return monthMatch && yearMatch;
     });
+
+    console.log(
+      `Chamadas após filtro (agente=${agentId}, ${selectedMonth}/${selectedYear}):`,
+      filtered.length
+    );
 
     setData(filtered);
   }, [allData, agentId, selectedYear, selectedMonth]);
@@ -712,7 +749,9 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                     >
                       {loading
                         ? 'Carregando arquivo...'
-                        : 'Nenhum dado encontrado. Selecione um arquivo Excel para começar.'}
+                        : allData.length === 0
+                        ? 'Nenhum dado carregado. Um supervisor (517 ou 307) precisa fazer upload do Excel.'
+                        : 'Arquivo carregado, mas não há chamadas para este agente e período selecionado.'}
                     </td>
                   </tr>
                 )}
