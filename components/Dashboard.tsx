@@ -54,6 +54,112 @@ const ESCALA_LINKS: Record<string, string> = {
 };
 // =======================================================================
 
+// ===================== FERIADOS NACIONAIS – AUTOMÁTICO =====================
+// Tudo aqui embaixo cuida de calcular feriados de QUALQUER ano automaticamente.
+// Se precisar ver / ajustar, é só voltar nesta seção. 👍
+
+type Feriado = {
+  nome: string;
+  data: Date;
+};
+
+const formatDatePtBR = (d: Date): string => {
+  const dd = String(d.getDate()).padStart(2, '0');
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const yyyy = d.getFullYear();
+  return `${dd}/${mm}/${yyyy}`;
+};
+
+const addDays = (date: Date, days: number): Date => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};
+
+// Algoritmo para calcular a data da Páscoa (método de Meeus/Jones/Butcher)
+const calcularPascoa = (year: number): Date => {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31); // 3=março, 4=abril
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+
+  // month-1 porque Date usa 0=jan
+  return new Date(year, month - 1, day);
+};
+
+// Retorna todos os feriados nacionais de um ano
+const getFeriadosNacionais = (year: number): Feriado[] => {
+  const pascoa = calcularPascoa(year);
+  const carnavalTerca = addDays(pascoa, -47);
+  const carnavalSeg = addDays(pascoa, -48);
+  const quartaCinzas = addDays(pascoa, -46);
+  const sextaSanta = addDays(pascoa, -2);
+  const corpusChristi = addDays(pascoa, 60);
+
+  return [
+    { nome: 'Confraternização Universal', data: new Date(year, 0, 1) },
+    { nome: 'Carnaval (segunda-feira)', data: carnavalSeg },
+    { nome: 'Carnaval (terça-feira)', data: carnavalTerca },
+    { nome: 'Quarta-feira de Cinzas (até 12h)', data: quartaCinzas },
+    { nome: 'Paixão de Cristo', data: sextaSanta },
+    { nome: 'Páscoa', data: pascoa },
+    { nome: 'Dia do Trabalho', data: new Date(year, 4, 1) }, // 01/05
+    { nome: 'Corpus Christi', data: corpusChristi },
+    { nome: 'Tiradentes', data: new Date(year, 3, 21) }, // 21/04
+    { nome: 'Independência do Brasil', data: new Date(year, 8, 7) }, // 07/09
+    { nome: 'Nossa Senhora Aparecida', data: new Date(year, 9, 12) }, // 12/10
+    { nome: 'Finados', data: new Date(year, 10, 2) }, // 02/11
+    { nome: 'Proclamação da República', data: new Date(year, 10, 15) }, // 15/11
+    { nome: 'Natal', data: new Date(year, 11, 25) }, // 25/12
+  ].sort((a, b) => a.data.getTime() - b.data.getTime());
+};
+
+// Pega sempre o PRÓXIMO feriado a partir de hoje (se acabou o ano, olha o próximo)
+const getProximoFeriado = () => {
+  const hoje = new Date();
+  const hojeZerado = new Date(
+    hoje.getFullYear(),
+    hoje.getMonth(),
+    hoje.getDate()
+  );
+
+  const anoAtual = hoje.getFullYear();
+  const feriadosAnoAtual = getFeriadosNacionais(anoAtual);
+
+  const futurosAnoAtual = feriadosAnoAtual.filter(
+    (f) => f.data.getTime() >= hojeZerado.getTime()
+  );
+
+  if (futurosAnoAtual.length > 0) {
+    const f = futurosAnoAtual[0];
+    return {
+      nome: f.nome,
+      data: f.data,
+      dataFormatada: formatDatePtBR(f.data),
+    };
+  }
+
+  // Se não tiver mais feriado no ano, pega o primeiro do próximo ano
+  const feriadosProxAno = getFeriadosNacionais(anoAtual + 1);
+  const primeiro = feriadosProxAno[0];
+  return {
+    nome: primeiro.nome,
+    data: primeiro.data,
+    dataFormatada: formatDatePtBR(primeiro.data),
+  };
+};
+// ============================================================================
+
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
 // --------- Helpers de status / duração ----------
@@ -186,10 +292,12 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
   const canManageFiles = supervisorIds.includes(agentId.toString());
 
   // ====== LINKS ESPECÍFICOS DO AGENTE LOGADO (MONITORIA / ESCALA) ======
-  // Se quiser adicionar novos, basta configurar em MONITORIA_LINKS / ESCALA_LINKS lá em cima
   const monitoriaUrl = MONITORIA_LINKS[agentId];
   const escalaUrl = ESCALA_LINKS[agentId];
   // =====================================================================
+
+  // 👉 Próximo feriado calculado automaticamente (nacionais)
+  const proximoFeriado = getProximoFeriado();
 
   const [allData, setAllData] = useState<CallRecord[]>([]);
   const [data, setData] = useState<CallRecord[]>([]);
@@ -646,7 +754,6 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           </div>
 
           {/* ===== ÁREA DE LINKS RÁPIDOS (PLAYBOOK / CAMPANHAS / MONITORIA / ESCALA) ===== */}
-          {/* 👉 SE PRECISAR ADICIONAR MAIS LINKS GERAIS OU POR RAMAL, VEJA AS CONSTANTES NO TOPO DO ARQUIVO */}
           <div className="flex flex-wrap items-center gap-2">
             {/* PlayBook – link geral */}
             <a
@@ -706,6 +813,40 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           </div>
           {/* ========================================================================== */}
         </div>
+
+        {/* 🗓️ CARD DE PRÓXIMO FERIADO */}
+        {proximoFeriado && (
+          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-8">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">
+              🗓️ Próximo Feriado
+            </h3>
+
+            <p className="text-xl font-bold text-gray-900">
+              {proximoFeriado.nome}
+            </p>
+
+            <p className="text-gray-600 text-md mt-1">
+              📅 {proximoFeriado.dataFormatada}
+            </p>
+
+            <p className="text-yellow-700 bg-yellow-100 px-4 py-2 mt-4 rounded-lg text-sm border border-yellow-200">
+              ⚠️ Verifique se a operação vai funcionar neste dia e confirme se
+              você está escalado.
+            </p>
+
+            {/* Botão de escala – aparece só se o agente tiver link */}
+            {escalaUrl && (
+              <a
+                href={escalaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm"
+              >
+                🔍 Consultar Escala
+              </a>
+            )}
+          </div>
+        )}
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
