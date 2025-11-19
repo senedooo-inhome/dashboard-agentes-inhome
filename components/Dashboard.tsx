@@ -137,7 +137,7 @@ const addDays = (date: Date, days: number): Date => {
   return result;
 };
 
-// Algoritmo para calcular a data da Páscoa (método de Meeus/Jones/Butcher)
+// Algoritmo para calcular a data da Páscoa (Meeus/Jones/Butcher)
 const calcularPascoa = (year: number): Date => {
   const a = year % 19;
   const b = Math.floor(year / 100);
@@ -154,38 +154,39 @@ const calcularPascoa = (year: number): Date => {
   const month = Math.floor((h + l - 7 * m + 114) / 31); // 3=março, 4=abril
   const day = ((h + l - 7 * m + 114) % 31) + 1;
 
-  // month-1 porque Date usa 0=jan
-  return new Date(year, month - 1, day);
+  return new Date(year, month - 1, day); // month-1 porque Date usa 0=jan
 };
 
-// Retorna todos os feriados nacionais de um ano
+// Retorna todos os feriados (nacionais + Caratinga) de um ano
 const getFeriadosNacionais = (year: number): Feriado[] => {
   const pascoa = calcularPascoa(year);
-  const carnavalTerca = addDays(pascoa, -47);
-  const carnavalSeg = addDays(pascoa, -48);
-  const quartaCinzas = addDays(pascoa, -46);
-  const sextaSanta = addDays(pascoa, -2);
-  const corpusChristi = addDays(pascoa, 60);
+  const carnaval = addDays(pascoa, -47);      // terça-feira de Carnaval
+  const sextaSanta = addDays(pascoa, -2);     // Paixão de Cristo
+  const corpusChristi = addDays(pascoa, 60);  // Corpus Christi
 
-  return [
-    { nome: 'Confraternização Universal', data: new Date(year, 0, 1) },
-    { nome: 'Carnaval (segunda-feira)', data: carnavalSeg },
-    { nome: 'Carnaval (terça-feira)', data: carnavalTerca },
-    { nome: 'Quarta-feira de Cinzas (até 12h)', data: quartaCinzas },
-    { nome: 'Paixão de Cristo', data: sextaSanta },
-    { nome: 'Páscoa', data: pascoa },
-    { nome: 'Dia do Trabalho', data: new Date(year, 4, 1) }, // 01/05
-    { nome: 'Corpus Christi', data: corpusChristi },
-    { nome: 'Tiradentes', data: new Date(year, 3, 21) }, // 21/04
-    { nome: 'Independência do Brasil', data: new Date(year, 8, 7) }, // 07/09
-    { nome: 'Nossa Senhora Aparecida', data: new Date(year, 9, 12) }, // 12/10
-    { nome: 'Finados', data: new Date(year, 10, 2) }, // 02/11
-    { nome: 'Proclamação da República', data: new Date(year, 10, 15) }, // 15/11
-    { nome: 'Natal', data: new Date(year, 11, 25) }, // 25/12
-  ].sort((a, b) => a.data.getTime() - b.data.getTime());
+  const feriados: Feriado[] = [
+    { nome: 'Confraternização Universal', data: new Date(year, 0, 1) },      // 01/01
+    { nome: 'Carnaval', data: carnaval },                                    // terça-feira
+    { nome: 'Paixão de Cristo', data: sextaSanta },                          // sexta-feira santa
+    { nome: 'Tiradentes', data: new Date(year, 3, 21) },                     // 21/04
+    { nome: 'Dia do Trabalho', data: new Date(year, 4, 1) },                 // 01/05
+    { nome: 'Corpus Christi', data: corpusChristi },                         // móvel
+    { nome: 'Aniversário Caratinga', data: new Date(year, 5, 24) },          // 24/06
+    { nome: 'Independência do Brasil', data: new Date(year, 8, 7) },         // 07/09
+    {
+      nome: 'Nossa Senhora Aparecida - Padroeira do Brasil',
+      data: new Date(year, 9, 12),                                           // 12/10
+    },
+    { nome: 'Finados', data: new Date(year, 10, 2) },                        // 02/11
+    { nome: 'Proclamação da República', data: new Date(year, 10, 15) },      // 15/11
+    { nome: 'Consciência Negra', data: new Date(year, 10, 20) },             // 20/11
+    { nome: 'Natal', data: new Date(year, 11, 25) },                         // 25/12
+  ];
+
+  return feriados.sort((a, b) => a.data.getTime() - b.data.getTime());
 };
 
-// Pega sempre o PRÓXIMO feriado a partir de hoje (se acabou o ano, olha o próximo)
+// Continua igual
 const getProximoFeriado = () => {
   const hoje = new Date();
   const hojeZerado = new Date(
@@ -219,6 +220,7 @@ const getProximoFeriado = () => {
     dataFormatada: formatDatePtBR(primeiro.data),
   };
 };
+
 // ============================================================================
 
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
