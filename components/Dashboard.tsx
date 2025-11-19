@@ -22,6 +22,11 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
+// 👉 TROCAR POR SEU LINK REAL DO EXCEL PUBLICADO
+const EXCEL_URL =
+  'https://docs.google.com/spreadsheets/d/12AnC2ureIEWxLoKbH6Yb2bSvyECDE39jIH6e_f9eJ2E/export?format=xlsx';
+
+
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
 
 // --------- Helpers de status / duração ----------
@@ -95,6 +100,59 @@ const formatDuration = (value?: string) => {
   return `${mm}:${ss}`;
 };
 
+// --------- Mapeia uma linha do Excel para CallRecord ----------
+const mapRowToCallRecord = (row: any, index: number): CallRecord => {
+  const rec: CallRecord = {
+    data_hora:
+      row['Data/hora'] ||
+      row['Data/Hora'] ||
+      row['DATA_HORA'] ||
+      '',
+    did: row['DID'] || '',
+    ramal:
+      row['Ramal']?.toString() ||
+      row['RAMAL']?.toString() ||
+      '',
+    alias:
+      row['Ramal']?.toString() ||
+      row['RAMAL']?.toString() ||
+      row['Agente']?.toString() ||
+      row['AGENTE']?.toString() ||
+      '',
+    agente:
+      row['Agente']?.toString() ||
+      row['AGENTE']?.toString() ||
+      '',
+    status: row['Status'] || row['STATUS'] || '',
+    fila: row['Fila'] || row['FILA'] || '',
+    tabulacao:
+      row['Tabulação'] ||
+      row['Tabulacao'] ||
+      row['TABULACAO'] ||
+      '',
+    origem: row['Origem'] || row['ORIGEM'] || '',
+    tempo_falado:
+      row['Tempo falado'] ||
+      row['Tempo Falado'] ||
+      row['Duração'] ||
+      row['Duracao'] ||
+      row['Duração da chamada'] ||
+      row['TEMPO_FALADO'] ||
+      '',
+    uniqueid:
+      row['uniqueid']?.toString() ||
+      row['UNIQUEID']?.toString() ||
+      '',
+  };
+
+  if (index < 5) {
+    console.log(`Linha ${index} (row):`, row);
+    console.log(`Linha ${index} (parsed):`, rec);
+  }
+
+  return rec;
+};
+
 const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
   // supervisores que podem gerenciar arquivos (upload + CSV)
   const supervisorIds = ['517', '307'];
@@ -128,47 +186,115 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
   const years = Array.from({ length: 5 }, (_, i) => currentYear - i);
 
-  // ---------- Restauração automática do localStorage ----------
-  useEffect(() => {
+  // --------- Carrega dados do Excel online ----------
+  const loadFromOnline = async () => {
+    console.log('Tentando carregar Excel online de:', EXCEL_URL);
+
+    const resp = await fetch(EXCEL_URL);
+    if (!resp.ok) {
+      throw new Error(`Erro HTTP ${resp.status}`);
+    }
+
+    const arrayBuffer = await resp.arrayBuffer();
+    const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    const json: any[] = XLSX.utils.sheet_to_json(worksheet, {
+      raw: false,
+      defval: '',
+    });
+
+    const parsed: CallRecord[] = json.map(mapRowToCallRecord);
+
+    console.log(
+      '✔️ Dados carregados do Excel online:',
+      parsed.length,
+      'registros'
+    );
+
+    setAllData(parsed);
+    setFileName('Carregado automaticamente (Excel online)');
+
+    // Salva cache no localStorage
     try {
-      // Restaura mês/ano usados por último
-      const savedYear = localStorage.getItem('callData:selectedYear');
-      const savedMonth = localStorage.getItem('callData:selectedMonth');
+      localStorage.setItem('callData', JSON.stringify(parsed));
+      localStorage.setItem(
+        'callData:lastUpdated',
+        new Date().toISOString()
+      );
+      console.log('✔️ Cache do Excel online salvo no localStorage.');
+    } catch (err) {
+      console.error(
+        'Erro ao salvar callData do online no localStorage:',
+        err
+      );
+    }
+  };
 
-      if (savedYear) {
-        const y = Number(savedYear);
-        if (!Number.isNaN(y)) setSelectedYear(y);
-      }
-
-      if (savedMonth) {
-        const m = Number(savedMonth);
-        if (!Number.isNaN(m)) setSelectedMonth(m);
-      }
-
-      // Restaura o Excel
+  // --------- Carrega dados do localStorage (fallback) ----------
+  const loadFromLocalStorage = () => {
+    try {
       const saved = localStorage.getItem('callData');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          console.log(
-            '✔️ Dados carregados do localStorage:',
-            parsed.length,
-            'registros'
-          );
-          setAllData(parsed);
-          setFileName('Carregado automaticamente (localStorage)');
-        } else {
-          console.log('Nenhum registro válido encontrado no localStorage.');
-        }
-      } else {
+      if (!saved) {
         console.log('Nenhum callData encontrado no localStorage.');
+        return;
+      }
+
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        console.log(
+          '✔️ Dados carregados do localStorage:',
+          parsed.length,
+          'registros'
+        );
+        setAllData(parsed);
+        setFileName('Carregado automaticamente (cache localStorage)');
+      } else {
+        console.log('callData no localStorage está vazio ou inválido.');
       }
     } catch (err) {
-      console.error('Erro ao restaurar do localStorage:', err);
+      console.error('Erro ao restaurar callData do localStorage:', err);
     }
+  };
+
+  // ---------- Restaura filtros + carrega Excel ao entrar no dashboard ----------
+  useEffect(() => {
+    const init = async () => {
+      // 1) Restaura filtros (mês/ano)
+      try {
+        const savedYear = localStorage.getItem('callData:selectedYear');
+        const savedMonth = localStorage.getItem('callData:selectedMonth');
+
+        if (savedYear) {
+          const y = Number(savedYear);
+          if (!Number.isNaN(y)) setSelectedYear(y);
+        }
+
+        if (savedMonth) {
+          const m = Number(savedMonth);
+          if (!Number.isNaN(m)) setSelectedMonth(m);
+        }
+      } catch (err) {
+        console.error('Erro ao restaurar filtros do localStorage:', err);
+      }
+
+      // 2) Tenta online primeiro, se der erro usa cache
+      setLoading(true);
+      try {
+        await loadFromOnline();
+      } catch (err) {
+        console.error('Erro ao carregar Excel online, tentando localStorage:', err);
+        loadFromLocalStorage();
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    init();
   }, []);
 
-  // ---------- Salva mês/ano no localStorage quando mudar ----------
+  // ---------- Salva filtros no localStorage quando mudar ----------
   useEffect(() => {
     try {
       localStorage.setItem('callData:selectedYear', String(selectedYear));
@@ -178,7 +304,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
     }
   }, [selectedYear, selectedMonth]);
 
-  // --------- Leitura do Excel local ----------
+  // --------- Upload manual do Excel (só supervisores) ----------
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -202,64 +328,14 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           defval: '',
         });
 
-        console.log('Primeira linha bruta do Excel:', json[0]);
-        console.log('Cabeçalhos:', json[0] ? Object.keys(json[0]) : []);
+        const parsed: CallRecord[] = json.map(mapRowToCallRecord);
 
-        const parsed: CallRecord[] = json.map((row, index) => {
-          const rec: CallRecord = {
-            data_hora:
-              row['Data/hora'] ||
-              row['Data/Hora'] ||
-              row['DATA_HORA'] ||
-              '',
-            did: row['DID'] || '',
-            ramal:
-              row['Ramal']?.toString() ||
-              row['RAMAL']?.toString() ||
-              '',
-            alias:
-              row['Ramal']?.toString() ||
-              row['RAMAL']?.toString() ||
-              row['Agente']?.toString() ||
-              row['AGENTE']?.toString() ||
-              '',
-            agente:
-              row['Agente']?.toString() ||
-              row['AGENTE']?.toString() ||
-              '',
-            status: row['Status'] || row['STATUS'] || '',
-            fila: row['Fila'] || row['FILA'] || '',
-            tabulacao:
-              row['Tabulação'] ||
-              row['Tabulacao'] ||
-              row['TABULACAO'] ||
-              '',
-            origem: row['Origem'] || row['ORIGEM'] || '',
-            tempo_falado:
-              row['Tempo falado'] ||
-              row['Tempo Falado'] ||
-              row['Duração'] ||
-              row['Duracao'] ||
-              row['Duração da chamada'] ||
-              row['TEMPO_FALADO'] ||
-              '',
-            uniqueid:
-              row['uniqueid']?.toString() ||
-              row['UNIQUEID']?.toString() ||
-              '',
-          };
+        console.log(
+          '✔️ Dados carregados via upload manual:',
+          parsed.length,
+          'registros'
+        );
 
-          if (index < 5) {
-            console.log(`Linha ${index} (row):`, row);
-            console.log(`Linha ${index} (parsed):`, rec);
-          }
-
-          return rec;
-        });
-
-        console.log('Total de registros lidos do Excel:', parsed.length);
-
-        // guarda na memória da aplicação
         setAllData(parsed);
 
         // salva no navegador para não precisar fazer upload novamente
@@ -269,12 +345,12 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             'callData:lastUpdated',
             new Date().toISOString()
           );
-          console.log('✔️ Excel salvo no localStorage.');
+          console.log('✔️ Excel de upload manual salvo no localStorage.');
         } catch (err) {
           console.error('Erro ao salvar no localStorage:', err);
         }
       } catch (err) {
-        console.error('Erro ao ler o arquivo Excel:', err);
+        console.error('Erro ao ler o arquivo Excel (upload):', err);
       } finally {
         setLoading(false);
       }
@@ -312,6 +388,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
       let month = p2;
       let year = p3;
 
+      // trata dd/mm/yyyy vs mm/dd/yyyy
       if (Number(p1) <= 12 && Number(p2) > 12) {
         month = p1;
         day = p2;
@@ -748,9 +825,9 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                       className="px-6 py-8 text-center text-sm text-gray-500"
                     >
                       {loading
-                        ? 'Carregando arquivo...'
+                        ? 'Carregando dados do Excel...'
                         : allData.length === 0
-                        ? 'Nenhum dado carregado. Um supervisor (517 ou 307) precisa fazer upload do Excel.'
+                        ? 'Nenhum dado carregado ainda. Verifique o link do Excel publicado ou peça para um supervisor conferir.'
                         : 'Arquivo carregado, mas não há chamadas para este agente e período selecionado.'}
                     </td>
                   </tr>
