@@ -20,6 +20,7 @@ import { LogOut, Download, RefreshCw, Filter } from 'lucide-react';
 interface DashboardProps {
   agentId: string;
   onLogout: () => void;
+  canManageFiles?: boolean;
 }
 
 const COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b'];
@@ -94,7 +95,11 @@ const formatDuration = (value?: string) => {
   return `${mm}:${ss}`;
 };
 
-const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
+const Dashboard: React.FC<DashboardProps> = ({
+  agentId,
+  onLogout,
+  canManageFiles,
+}) => {
   const [allData, setAllData] = useState<CallRecord[]>([]);
   const [data, setData] = useState<CallRecord[]>([]);
   const [loading, setLoading] = useState(false);
@@ -411,33 +416,38 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
               />
             </button>
 
-            {/* Upload do Excel */}
-            <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-              <span className="bg-gray-100 px-3 py-2 rounded-lg border border-dashed border-gray-300 hover:bg-gray-50">
-                Escolher arquivo Excel
-              </span>
-              <input
-                type="file"
-                accept=".xlsx,.xls"
-                onChange={handleFileChange}
-                className="hidden"
-              />
-              {fileName && (
-                <span className="text-xs text-gray-500 truncate max-w-[150px]">
-                  {fileName}
+            {/* Upload do Excel – só pra quem pode gerenciar arquivos */}
+            {canManageFiles && (
+              <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                <span className="bg-gray-100 px-3 py-2 rounded-lg border border-dashed border-gray-300 hover:bg-gray-50">
+                  Escolher arquivo Excel
                 </span>
-              )}
-            </label>
+                <input
+                  type="file"
+                  accept=".xlsx,.xls"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+                {fileName && (
+                  <span className="text-xs text-gray-500 truncate max-w-[150px]">
+                    {fileName}
+                  </span>
+                )}
+              </label>
+            )}
           </div>
 
-          <button
-            onClick={handleExport}
-            disabled={data.length === 0}
-            className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium w-full sm:w-auto justify-center"
-          >
-            <Download className="h-4 w-4" />
-            Baixar CSV
-          </button>
+          {/* Botão Baixar CSV – só pra quem pode também */}
+          {canManageFiles && (
+            <button
+              onClick={handleExport}
+              disabled={data.length === 0}
+              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium w-full sm:w-auto justify-center"
+            >
+              <Download className="h-4 w-4" />
+              Baixar CSV
+            </button>
+          )}
         </div>
 
         {/* Summary Cards */}
