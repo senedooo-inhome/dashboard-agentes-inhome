@@ -31,8 +31,7 @@ const EXCEL_URL =
 const LINK_PLAYBOOK =
   'https://sites.google.com/view/playbook-in-home?usp=sharing';
 
-const LINK_CAMPANHAS =
-  'https://agentes-sonax.vercel.app/campanhas';
+const LINK_CAMPANHAS = 'https://agentes-sonax.vercel.app/campanhas';
 // ======================================================================
 
 // =========== LINKS ESPECÍFICOS POR RAMAL (MONITORIA / ESCALA) ===========
@@ -242,10 +241,7 @@ const mapRowToCallRecord = (row: any, index: number): CallRecord => {
       row['DATA_HORA'] ||
       '',
     did: row['DID'] || '',
-    ramal:
-      row['Ramal']?.toString() ||
-      row['RAMAL']?.toString() ||
-      '',
+    ramal: row['Ramal']?.toString() || row['RAMAL']?.toString() || '',
     alias:
       row['Ramal']?.toString() ||
       row['RAMAL']?.toString() ||
@@ -360,16 +356,10 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
     // Salva cache no localStorage
     try {
       localStorage.setItem('callData', JSON.stringify(parsed));
-      localStorage.setItem(
-        'callData:lastUpdated',
-        new Date().toISOString()
-      );
+      localStorage.setItem('callData:lastUpdated', new Date().toISOString());
       console.log('✔️ Cache do Excel online salvo no localStorage.');
     } catch (err) {
-      console.error(
-        'Erro ao salvar callData do online no localStorage:',
-        err
-      );
+      console.error('Erro ao salvar callData do online no localStorage:', err);
     }
   };
 
@@ -814,40 +804,6 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           {/* ========================================================================== */}
         </div>
 
-        {/* 🗓️ CARD DE PRÓXIMO FERIADO */}
-        {proximoFeriado && (
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mb-8">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">
-              🗓️ Próximo Feriado
-            </h3>
-
-            <p className="text-xl font-bold text-gray-900">
-              {proximoFeriado.nome}
-            </p>
-
-            <p className="text-gray-600 text-md mt-1">
-              📅 {proximoFeriado.dataFormatada}
-            </p>
-
-            <p className="text-yellow-700 bg-yellow-100 px-4 py-2 mt-4 rounded-lg text-sm border border-yellow-200">
-              ⚠️ Verifique se a operação vai funcionar neste dia e confirme se
-              você está escalado.
-            </p>
-
-            {/* Botão de escala – aparece só se o agente tiver link */}
-            {escalaUrl && (
-              <a
-                href={escalaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm"
-              >
-                🔍 Consultar Escala
-              </a>
-            )}
-          </div>
-        )}
-
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
@@ -880,7 +836,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Line Chart */}
+          {/* Line Chart - ocupa as duas colunas na primeira linha */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 lg:col-span-2">
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Evolução Diária
@@ -931,7 +887,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             </ResponsiveContainer>
           </div>
 
-          {/* Bar Chart */}
+          {/* Bar Chart – fica à esquerda na linha de baixo */}
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-6">
               Volume por Fila
@@ -971,15 +927,48 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                     fill="#3b82f6"
                     radius={[0, 4, 4, 0]}
                   >
-                    <LabelList
-                      dataKey="value"
-                      position="right"
-                    />
+                    <LabelList dataKey="value" position="right" />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
+
+          {/* Card Próximo Feriado – fica à direita na linha de baixo */}
+          {proximoFeriado && (
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                  🗓️ Próximo Feriado
+                </h3>
+
+                <p className="text-xl font-bold text-gray-900">
+                  {proximoFeriado.nome}
+                </p>
+
+                <p className="text-gray-600 text-md mt-1">
+                  📅 {proximoFeriado.dataFormatada}
+                </p>
+
+                <p className="text-yellow-700 bg-yellow-100 px-4 py-2 mt-4 rounded-lg text-sm border border-yellow-200">
+                  ⚠️ Verifique se a operação vai funcionar neste dia e
+                  confirme se você está escalado.
+                </p>
+              </div>
+
+              {/* Botão de escala – só aparece se o agente tiver link de escala */}
+              {escalaUrl && (
+                <a
+                  href={escalaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm self-start"
+                >
+                  🔍 Consultar Escala
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Detailed Table */}
@@ -1019,8 +1008,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                         className="hover:bg-gray-50 transition-colors"
                       >
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                          {row.data_hora ||
-                            'Data não disponível'}
+                          {row.data_hora || 'Data não disponível'}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                           {row.fila || 'Sem Fila'}
