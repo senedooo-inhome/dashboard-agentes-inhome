@@ -32,6 +32,9 @@ const LINK_PLAYBOOK =
   'https://sites.google.com/view/playbook-in-home?usp=sharing';
 
 const LINK_CAMPANHAS = 'https://agentes-sonax.vercel.app/campanhas';
+
+// 👉 Link fixo da escala para o PRÓXIMO FERIADO (todos veem o mesmo)
+const LINK_ESCALA_FERIADO = 'https://escalainhome.my.canva.site/';
 // ======================================================================
 
 // =========== LINKS ESPECÍFICOS POR RAMAL (MONITORIA / ESCALA) ===========
@@ -39,11 +42,63 @@ const LINK_CAMPANHAS = 'https://agentes-sonax.vercel.app/campanhas';
 
 // Monitoria de Qualidade por ramal
 const MONITORIA_LINKS: Record<string, string> = {
-  '514': 'https://sonax.bitrix24.com.br/~CZY33', // Monitoria – Ramal 514
-  // '523': 'https://link-da-monitoria-ramal-523',
-  // '512': 'https://link-da-monitoria-ramal-512',
+  '523': 'https://sonax.bitrix24.com.br/~iia7C',
+  '512': 'https://sonax.bitrix24.com.br/~64viI',
+  '525': 'https://sonax.bitrix24.com.br/~Wkic0',
+  '502': 'https://sonax.bitrix24.com.br/~76s6h',
+  '524': 'https://sonax.bitrix24.com.br/~ou74E',
+  '504': 'https://sonax.bitrix24.com.br/~li7CN',
+  '312': 'https://sonax.bitrix24.com.br/~DI2tl',
+  '366': 'https://sonax.bitrix24.com.br/~W7dnd',
+  '314': 'https://sonax.bitrix24.com.br/~qkqyK',
+  '511': 'https://sonax.bitrix24.com.br/~8r1oZ',
+  '521': 'https://sonax.bitrix24.com.br/~UYNS1',
+  '516': 'https://sonax.bitrix24.com.br/~ehWDC',
+  '313': 'https://sonax.bitrix24.com.br/~XVUX3',
+  '519': 'https://sonax.bitrix24.com.br/~AlFJ5',
+  '365': 'https://sonax.bitrix24.com.br/~5qxYy',
+  '323': 'https://sonax.bitrix24.com.br/~GVNPj',
+  '503': 'https://sonax.bitrix24.com.br/~OoSmr',
+  '515': 'https://sonax.bitrix24.com.br/~5WhSi',
+  '316': 'https://sonax.bitrix24.com.br/~p9HFB',
+  '509': 'https://sonax.bitrix24.com.br/~wCgBx',
+  '300': 'https://sonax.bitrix24.com.br/~7CFxg',
+  '518': 'https://sonax.bitrix24.com.br/~o0U2l',
+  '505': 'https://sonax.bitrix24.com.br/~o2SqE',
+  '361': 'https://sonax.bitrix24.com.br/~tLNaD',
+  '319': 'https://sonax.bitrix24.com.br/~R0sg1',
+  '305': 'https://sonax.bitrix24.com.br/~g6D9g',
+  '369': 'https://sonax.bitrix24.com.br/~mwHfB',
+  '362': 'https://sonax.bitrix24.com.br/~FkGoN',
+  '310': 'https://sonax.bitrix24.com.br/~IyzQ2',
+  '308': 'https://sonax.bitrix24.com.br/~hXc1b',
+  '311': 'https://sonax.bitrix24.com.br/~u84mk',
+  '500': 'https://sonax.bitrix24.com.br/~iuusg',
+  '303': 'https://sonax.bitrix24.com.br/~Pf2q7',
+  '320': 'https://sonax.bitrix24.com.br/~lfdLX',
+  '360': 'https://sonax.bitrix24.com.br/~e1TJ6',
+  '368': 'https://sonax.bitrix24.com.br/~iRjek',
+  '363': 'https://sonax.bitrix24.com.br/~4s6Yf',
+  '520': 'https://sonax.bitrix24.com.br/~Y38HE',
+  '322': 'https://sonax.bitrix24.com.br/~Ot0El',
+  '315': 'https://sonax.bitrix24.com.br/~qNIno',
+  '514': 'https://sonax.bitrix24.com.br/~ZWbWb',
+  '328': 'https://sonax.bitrix24.com.br/~hXVMP',
+  '302': 'https://sonax.bitrix24.com.br/~dc7Xl',
+  '325': 'https://sonax.bitrix24.com.br/~dpBqR',
+  '306': 'https://sonax.bitrix24.com.br/~S0blz',
+  '513': 'https://sonax.bitrix24.com.br/~LHFVG',
+  '327': 'https://sonax.bitrix24.com.br/~6zw2b',
+  '309': 'https://sonax.bitrix24.com.br/~8zRti',
+  '364': 'https://sonax.bitrix24.com.br/~igJcN',
+  '318': 'https://sonax.bitrix24.com.br/~4WR2r',
+  '370': 'https://sonax.bitrix24.com.br/~RbqaF',
+  '371': 'https://sonax.bitrix24.com.br/~DtYeT',
+  '372': 'https://sonax.bitrix24.com.br/~SfGqb',
+  '326': 'https://sonax.bitrix24.com.br/~3wjD4'
 };
 
+//==================================================================================================
 // Escala por ramal
 // Escala por ramal 6x1
 const ESCALA_LINKS: Record<string, string> = {
@@ -92,7 +147,7 @@ const ESCALA_LINKS: Record<string, string> = {
   '503':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=230321399&single=true',
   '511':
-    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=705437354&single=true', 
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=705437354&single=true',
   '514':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=552936615&single=true',
   '515':
@@ -160,27 +215,27 @@ const calcularPascoa = (year: number): Date => {
 // Retorna todos os feriados (nacionais + Caratinga) de um ano
 const getFeriadosNacionais = (year: number): Feriado[] => {
   const pascoa = calcularPascoa(year);
-  const carnaval = addDays(pascoa, -47);      // terça-feira de Carnaval
-  const sextaSanta = addDays(pascoa, -2);     // Paixão de Cristo
-  const corpusChristi = addDays(pascoa, 60);  // Corpus Christi
+  const carnaval = addDays(pascoa, -47); // terça-feira de Carnaval
+  const sextaSanta = addDays(pascoa, -2); // Paixão de Cristo
+  const corpusChristi = addDays(pascoa, 60); // Corpus Christi
 
   const feriados: Feriado[] = [
-    { nome: 'Confraternização Universal', data: new Date(year, 0, 1) },      // 01/01
-    { nome: 'Carnaval', data: carnaval },                                    // terça-feira
-    { nome: 'Paixão de Cristo', data: sextaSanta },                          // sexta-feira santa
-    { nome: 'Tiradentes', data: new Date(year, 3, 21) },                     // 21/04
-    { nome: 'Dia do Trabalho', data: new Date(year, 4, 1) },                 // 01/05
-    { nome: 'Corpus Christi', data: corpusChristi },                         // móvel
-    { nome: 'Aniversário Caratinga', data: new Date(year, 5, 24) },          // 24/06
-    { nome: 'Independência do Brasil', data: new Date(year, 8, 7) },         // 07/09
+    { nome: 'Confraternização Universal', data: new Date(year, 0, 1) }, // 01/01
+    { nome: 'Carnaval', data: carnaval }, // terça-feira
+    { nome: 'Paixão de Cristo', data: sextaSanta }, // sexta-feira santa
+    { nome: 'Tiradentes', data: new Date(year, 3, 21) }, // 21/04
+    { nome: 'Dia do Trabalho', data: new Date(year, 4, 1) }, // 01/05
+    { nome: 'Corpus Christi', data: corpusChristi }, // móvel
+    { nome: 'Aniversário Caratinga', data: new Date(year, 5, 24) }, // 24/06
+    { nome: 'Independência do Brasil', data: new Date(year, 8, 7) }, // 07/09
     {
       nome: 'Nossa Senhora Aparecida - Padroeira do Brasil',
-      data: new Date(year, 9, 12),                                           // 12/10
+      data: new Date(year, 9, 12), // 12/10
     },
-    { nome: 'Finados', data: new Date(year, 10, 2) },                        // 02/11
-    { nome: 'Proclamação da República', data: new Date(year, 10, 15) },      // 15/11
-    { nome: 'Consciência Negra', data: new Date(year, 10, 20) },             // 20/11
-    { nome: 'Natal', data: new Date(year, 11, 25) },                         // 25/12
+    { nome: 'Finados', data: new Date(year, 10, 2) }, // 02/11
+    { nome: 'Proclamação da República', data: new Date(year, 10, 15) }, // 15/11
+    { nome: 'Consciência Negra', data: new Date(year, 10, 20) }, // 20/11
+    { nome: 'Natal', data: new Date(year, 11, 25) }, // 25/12
   ];
 
   return feriados.sort((a, b) => a.data.getTime() - b.data.getTime());
@@ -1020,17 +1075,15 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                 </p>
               </div>
 
-              {/* Botão de escala – só aparece se o agente tiver link de escala */}
-              {escalaUrl && (
-                <a
-                  href={escalaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm self-start"
-                >
-                  🔍 Consultar Escala
-                </a>
-              )}
+              {/* Botão de escala para o próximo feriado – link fixo para todos */}
+              <a
+                href={LINK_ESCALA_FERIADO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors text-sm self-start"
+              >
+                🔍 Consultar Escala
+              </a>
             </div>
           )}
         </div>
