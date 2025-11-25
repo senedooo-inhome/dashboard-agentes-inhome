@@ -81,6 +81,7 @@ const MONITORIA_LINKS: Record<string, string> = {
   '363': 'https://sonax.bitrix24.com.br/~4s6Yf',
   '520': 'https://sonax.bitrix24.com.br/~Y38HE',
   '322': 'https://sonax.bitrix24.com.br/~Ot0El',
+  '329': 'https://sonax.bitrix24.com.br/~xvyZb',
   '315': 'https://sonax.bitrix24.com.br/~qNIno',
   '514': 'https://sonax.bitrix24.com.br/~ZWbWb',
   '328': 'https://sonax.bitrix24.com.br/~hXVMP',
@@ -128,6 +129,8 @@ const ESCALA_LINKS: Record<string, string> = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=25761090&single=true',
   '328':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=552936615&single=true',
+    '329':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=1258187118&single=true',
   '363':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=205640056&single=true',
   '364':
