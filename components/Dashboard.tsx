@@ -97,6 +97,8 @@ const MONITORIA_LINKS: Record<string, string> = {
   '370': 'https://sonax.bitrix24.com.br/~RbqaF',
   '371': 'https://sonax.bitrix24.com.br/~DtYeT',
   '372': 'https://sonax.bitrix24.com.br/~SfGqb',
+  '374': 'https://sonax.bitrix24.com.br/~o2HOs',
+  '367': 'https://sonax.bitrix24.com.br/~c3sEw',
   '326': 'https://sonax.bitrix24.com.br/~3wjD4'
 };
 
@@ -170,6 +172,10 @@ const ESCALA_LINKS: Record<string, string> = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=2089755120&single=true',
   '523':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=0&single=true',
+    '374':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=1261425454&single=true',
+    '367':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=659513775&single=true',
   '524':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=371304553&single=true',
 };
