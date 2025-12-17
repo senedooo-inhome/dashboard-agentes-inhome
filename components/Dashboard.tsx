@@ -94,7 +94,7 @@ const MONITORIA_LINKS: Record<string, string> = {
   '309': 'https://sonax.bitrix24.com.br/~8zRti',
   '364': 'https://sonax.bitrix24.com.br/~igJcN',
   '318': 'https://sonax.bitrix24.com.br/~4WR2r',
-  '370': 'https://sonax.bitrix24.com.br/~RbqaF',
+  '370': 'https://sonax.bitrix24.com.br/~ZeCBF',
   '371': 'https://sonax.bitrix24.com.br/~DtYeT',
   '372': 'https://sonax.bitrix24.com.br/~SfGqb',
   '374': 'https://sonax.bitrix24.com.br/~o2HOs',
