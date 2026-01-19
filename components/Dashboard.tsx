@@ -99,7 +99,9 @@ const MONITORIA_LINKS: Record<string, string> = {
   '372': 'https://sonax.bitrix24.com.br/~SfGqb',
   '374': 'https://sonax.bitrix24.com.br/~o2HOs',
   '367': 'https://sonax.bitrix24.com.br/~c3sEw',
-  '326': 'https://sonax.bitrix24.com.br/~3wjD4'
+  '326': 'https://sonax.bitrix24.com.br/~3wjD4',
+  '377': 'https://sonax.bitrix24.com.br/~wClic',
+  '376': 'https://sonax.bitrix24.com.br/~0WI6w'
 };
 
 //==================================================================================================
@@ -176,6 +178,10 @@ const ESCALA_LINKS: Record<string, string> = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=659513775&single=true',
   '524':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=371304553&single=true',
+    '377':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=2068136846&single=true',
+    '376':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=192044735&single=true',
 };
 
 // =======================================================================
