@@ -34,7 +34,8 @@ const LINK_PLAYBOOK =
 const LINK_CAMPANHAS = 'https://agentes-sonax.vercel.app/campanhas';
 
 // 👉 Link fixo da escala para o PRÓXIMO FERIADO (todos veem o mesmo)
-const LINK_ESCALA_FERIADO = 'https://escalainhome.my.canva.site/';
+const LINK_ESCALA_FERIADO = 'https://agentes-sonax.vercel.app/escala-feriado';
+
 // ======================================================================
 
 // =========== LINKS ESPECÍFICOS POR RAMAL (MONITORIA / ESCALA) ===========
@@ -1086,8 +1087,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                 </p>
 
                 <p className="text-yellow-700 bg-yellow-100 px-4 py-2 mt-4 rounded-lg text-sm border border-yellow-200">
-                  ⚠️ Verifique se a operação vai funcionar neste dia e
-                  confirme se você está escalado.
+                  ⚠️ Verifique se a operação vai funcionar neste dia.
                 </p>
               </div>
 
