@@ -102,7 +102,8 @@ const MONITORIA_LINKS: Record<string, string> = {
   '367': 'https://sonax.bitrix24.com.br/~c3sEw',
   '326': 'https://sonax.bitrix24.com.br/~3wjD4',
   '377': 'https://sonax.bitrix24.com.br/~wClic',
-  '376': 'https://sonax.bitrix24.com.br/~0WI6w'
+  '376': 'https://sonax.bitrix24.com.br/~0WI6w',
+  "379": 'https://sonax.bitrix24.com.br/~TRX7Y'
 };
 
 //==================================================================================================
@@ -135,9 +136,9 @@ const ESCALA_LINKS: Record<string, string> = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=25761090&single=true',
   '328':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=552936615&single=true',
-    '359':
+  '359':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=933802356&single=true',
-    '329':
+  '329':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=1258187118&single=true',
   '363':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=205640056&single=true',
@@ -173,23 +174,86 @@ const ESCALA_LINKS: Record<string, string> = {
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=2089755120&single=true',
   '523':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=0&single=true',
-    '374':
+  '374':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=1261425454&single=true',
-    '367':
+  '367':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=659513775&single=true',
   '524':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=371304553&single=true',
-    '377':
+  '377':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=2068136846&single=true',
-    '376':
+  '376':
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=192044735&single=true',
+    '379':
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7gOJzJ0fM07hgbZm0P8vZdU8o2KkMsOsqhpmXumekTclrFrdqQSTfrdxuAEDhoIbMhSDs-xDmknxK/pubhtml?gid=383519841&single=true'
+};
+
+// ======================= NOVO: PAUSAS DURANTE A SEMANA =======================
+// 517 e 523 preenchidos; demais agentes (mesmos da monitoria) ficam vazios
+const PAUSAS_LINKS: Record<string, string> = {
+  ...Object.fromEntries(Object.keys(MONITORIA_LINKS).map((k) => [k, ''])),
+
+  '300': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2142437450&single=true',
+  '302': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=20507821&single=true',
+  '303': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=756664457&single=true',
+  '305': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2051629859&single=true',
+  '306': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=813749059&single=true',
+  '308': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=102503259&single=true',
+  '309': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2136482759&single=true',
+  '310': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2023513968&single=true',
+  '311': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=296449043&single=true',
+  '312': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=584226349&single=true',
+  '314': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=384431001&single=true',
+  '315': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=820259857&single=true',
+  '316': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=225579748&single=true',
+  '318': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=64832934&single=true',
+  '320': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1974371585&single=true',
+  '322': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1542996410&single=true',
+  '325': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=433543390&single=true',
+  '326': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=91194220&single=true',
+  '327': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1194403721&single=true',
+  '328': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1363807707&single=true',
+
+  '359': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1248875658&single=true',
+  '360': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1482604308&single=true',
+  '362': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1848106607&single=true',
+  '363': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=383124424&single=true',
+  '364': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=553908150&single=true',
+  '365': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2102730184&single=true',
+  '367': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=610301336&single=true',
+  '369': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1623473522&single=true',
+  '370': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=244987254&single=true',
+  '371': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1664629942&single=true',
+  '374': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1173213530&single=true',
+  '375': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=93607250&single=true',
+  '376': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1695836818&single=true',
+  '377': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=122679056&single=true',
+  '379': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1621635781&single=true',
+
+  '500': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=632651585&single=true',
+  '502': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1239948983&single=true',
+  '503': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=974466015&single=true',
+  '504': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1133383432&single=true',
+  '505': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1631515006&single=true',
+  '509': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=102503259&single=true',
+  '511': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=912023096&single=true',
+  '512': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1972643601&single=true',
+  '514': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1513127847&single=true',
+  '515': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1009198874&single=true',
+  '516': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=600735279&single=true',
+  '517': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=0&single=true',
+  '518': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1583816830&single=true',
+  '519': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=416579432&single=true',
+  '520': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1374508747&single=true',
+  '521': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2137246003&single=true',
+  '523': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=151352378&single=true',
+  '524': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1949590862&single=true',
+  '525': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=797451066&single=true',
 };
 
 // =======================================================================
 
 // ===================== FERIADOS NACIONAIS – AUTOMÁTICO =====================
-// Tudo aqui embaixo cuida de calcular feriados de QUALQUER ano automaticamente.
-// Se precisar ver / ajustar, é só voltar nesta seção. 👍
 
 type Feriado = {
   nome: string;
@@ -384,17 +448,11 @@ const mapRowToCallRecord = (row: any, index: number): CallRecord => {
       row['Agente']?.toString() ||
       row['AGENTE']?.toString() ||
       '',
-    agente:
-      row['Agente']?.toString() ||
-      row['AGENTE']?.toString() ||
-      '',
+    agente: row['Agente']?.toString() || row['AGENTE']?.toString() || '',
     status: row['Status'] || row['STATUS'] || '',
     fila: row['Fila'] || row['FILA'] || '',
     tabulacao:
-      row['Tabulação'] ||
-      row['Tabulacao'] ||
-      row['TABULACAO'] ||
-      '',
+      row['Tabulação'] || row['Tabulacao'] || row['TABULACAO'] || '',
     origem: row['Origem'] || row['ORIGEM'] || '',
     tempo_falado:
       row['Tempo falado'] ||
@@ -404,10 +462,7 @@ const mapRowToCallRecord = (row: any, index: number): CallRecord => {
       row['Duração da chamada'] ||
       row['TEMPO_FALADO'] ||
       '',
-    uniqueid:
-      row['uniqueid']?.toString() ||
-      row['UNIQUEID']?.toString() ||
-      '',
+    uniqueid: row['uniqueid']?.toString() || row['UNIQUEID']?.toString() || '',
   };
 
   if (index < 5) {
@@ -423,9 +478,10 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
   const supervisorIds = ['517', '307'];
   const canManageFiles = supervisorIds.includes(agentId.toString());
 
-  // ====== LINKS ESPECÍFICOS DO AGENTE LOGADO (MONITORIA / ESCALA) ======
+  // ====== LINKS ESPECÍFICOS DO AGENTE LOGADO (MONITORIA / ESCALA / PAUSAS) ======
   const monitoriaUrl = MONITORIA_LINKS[agentId];
   const escalaUrl = ESCALA_LINKS[agentId];
+  const pausasUrl = PAUSAS_LINKS[agentId]; // ✅ NOVO
   // =====================================================================
 
   // 👉 Próximo feriado calculado automaticamente (nacionais)
@@ -480,11 +536,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
     const parsed: CallRecord[] = json.map(mapRowToCallRecord);
 
-    console.log(
-      '✔️ Dados carregados do Excel online:',
-      parsed.length,
-      'registros'
-    );
+    console.log('✔️ Dados carregados do Excel online:', parsed.length, 'registros');
 
     setAllData(parsed);
     setFileName('Carregado automaticamente (Excel online)');
@@ -510,11 +562,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
       const parsed = JSON.parse(saved);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        console.log(
-          '✔️ Dados carregados do localStorage:',
-          parsed.length,
-          'registros'
-        );
+        console.log('✔️ Dados carregados do localStorage:', parsed.length, 'registros');
         setAllData(parsed);
         setFileName('Carregado automaticamente (cache localStorage)');
       } else {
@@ -551,10 +599,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
       try {
         await loadFromOnline();
       } catch (err) {
-        console.error(
-          'Erro ao carregar Excel online, tentando localStorage:',
-          err
-        );
+        console.error('Erro ao carregar Excel online, tentando localStorage:', err);
         loadFromLocalStorage();
       } finally {
         setLoading(false);
@@ -600,21 +645,14 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
 
         const parsed: CallRecord[] = json.map(mapRowToCallRecord);
 
-        console.log(
-          '✔️ Dados carregados via upload manual:',
-          parsed.length,
-          'registros'
-        );
+        console.log('✔️ Dados carregados via upload manual:', parsed.length, 'registros');
 
         setAllData(parsed);
 
         // salva no navegador para não precisar fazer upload novamente
         try {
           localStorage.setItem('callData', JSON.stringify(parsed));
-          localStorage.setItem(
-            'callData:lastUpdated',
-            new Date().toISOString()
-          );
+          localStorage.setItem('callData:lastUpdated', new Date().toISOString());
           console.log('✔️ Excel de upload manual salvo no localStorage.');
         } catch (err) {
           console.error('Erro ao salvar no localStorage:', err);
@@ -668,11 +706,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
         year = '20' + year;
       }
 
-      const callDate = new Date(
-        Number(year),
-        Number(month) - 1,
-        Number(day)
-      );
+      const callDate = new Date(Number(year), Number(month) - 1, Number(day));
 
       const monthMatch = callDate.getMonth() + 1 === selectedMonth;
       const yearMatch = callDate.getFullYear() === selectedYear;
@@ -749,12 +783,10 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
       { name: 'Não Atendidas', value: totalNaoAtendidas },
     ];
 
-    const barChartData = Array.from(queueMap.entries()).map(
-      ([name, value]) => ({
-        name,
-        value,
-      })
-    );
+    const barChartData = Array.from(queueMap.entries()).map(([name, value]) => ({
+      name,
+      value,
+    }));
 
     return {
       totalCalls,
@@ -796,9 +828,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
               Agente:{' '}
-              <span className="font-medium text-gray-900">
-                {agentId}
-              </span>
+              <span className="font-medium text-gray-900">{agentId}</span>
             </span>
             <button
               onClick={onLogout}
@@ -819,9 +849,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
               <Filter className="h-4 w-4 text-gray-400" />
               <select
                 value={selectedYear}
-                onChange={(e) =>
-                  setSelectedYear(Number(e.target.value))
-                }
+                onChange={(e) => setSelectedYear(Number(e.target.value))}
                 className="bg-transparent border-none text-sm font-medium focus:ring-0 text-gray-700"
               >
                 {years.map((y) => (
@@ -833,9 +861,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
               <span className="text-gray-300">|</span>
               <select
                 value={selectedMonth}
-                onChange={(e) =>
-                  setSelectedMonth(Number(e.target.value))
-                }
+                onChange={(e) => setSelectedMonth(Number(e.target.value))}
                 className="bg-transparent border-none text-sm font-medium focus:ring-0 text-gray-700"
               >
                 {months.map((m) => (
@@ -851,11 +877,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
               className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
               title="Reaplicar filtros"
             >
-              <RefreshCw
-                className={`h-5 w-5 ${
-                  loading ? 'animate-spin' : ''
-                }`}
-              />
+              <RefreshCw className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`} />
             </button>
 
             {/* Upload do Excel – só pra quem pode gerenciar arquivos */}
@@ -879,7 +901,7 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             )}
           </div>
 
-          {/* ===== ÁREA DE LINKS RÁPIDOS (PLAYBOOK / CAMPANHAS / MONITORIA / ESCALA) ===== */}
+          {/* ===== ÁREA DE LINKS RÁPIDOS (PLAYBOOK / CAMPANHAS / MONITORIA / ESCALA / PAUSAS) ===== */}
           <div className="flex flex-wrap items-center gap-2">
             {/* PlayBook – link geral */}
             <a
@@ -925,6 +947,27 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
               </a>
             )}
 
+            {/* ✅ NOVO: Suas pausas durante a semana */}
+            {pausasUrl ? (
+              <a
+                href={pausasUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm bg-amber-600 text-white px-3 py-2 rounded-lg hover:bg-amber-700 transition-colors"
+              >
+                Horario de Pausas - SEMANA
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Link de pausas ainda não configurado para este agente."
+                className="text-xs sm:text-sm bg-amber-100 text-amber-800 px-3 py-2 rounded-lg border border-amber-200 cursor-not-allowed opacity-80"
+              >
+                Horario de Pausas - SEMANA
+              </button>
+            )}
+
             {/* Botão Baixar CSV – só pra quem pode também */}
             {canManageFiles && (
               <button
@@ -943,30 +986,18 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-            <p className="text-sm font-medium text-gray-500">
-              Total de Ligações
-            </p>
-            <p className="text-3xl font-bold text-gray-900 mt-2">
-              {stats.totalCalls}
-            </p>
+            <p className="text-sm font-medium text-gray-500">Total de Ligações</p>
+            <p className="text-3xl font-bold text-gray-900 mt-2">{stats.totalCalls}</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-blue-100 bg-blue-50">
-            <p className="text-sm font-medium text-blue-600">
-              Atendidas
-            </p>
-            <p className="text-3xl font-bold text-blue-700 mt-2">
-              {stats.totalAtendidas}
-            </p>
+            <p className="text-sm font-medium text-blue-600">Atendidas</p>
+            <p className="text-3xl font-bold text-blue-700 mt-2">{stats.totalAtendidas}</p>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border border-red-100 bg-red-50">
-            <p className="text-sm font-medium text-red-600">
-              Não Atendidas
-            </p>
-            <p className="text-3xl font-bold text-red-700 mt-2">
-              {stats.totalNaoAtendidas}
-            </p>
+            <p className="text-sm font-medium text-red-600">Não Atendidas</p>
+            <p className="text-3xl font-bold text-red-700 mt-2">{stats.totalNaoAtendidas}</p>
           </div>
         </div>
 
@@ -979,25 +1010,14 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
             </h3>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={stats.lineChartData}>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  stroke="#f0f0f0"
-                />
-                <XAxis
-                  dataKey="date"
-                  stroke="#9ca3af"
-                  tick={{ fontSize: 12 }}
-                />
-                <YAxis
-                  stroke="#9ca3af"
-                  tick={{ fontSize: 12 }}
-                />
+                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                <XAxis dataKey="date" stroke="#9ca3af" tick={{ fontSize: 12 }} />
+                <YAxis stroke="#9ca3af" tick={{ fontSize: 12 }} />
                 <Tooltip
                   contentStyle={{
                     borderRadius: '8px',
                     border: 'none',
-                    boxShadow:
-                      '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   }}
                 />
                 <Legend />
@@ -1033,22 +1053,10 @@ const Dashboard: React.FC<DashboardProps> = ({ agentId, onLogout }) => {
                 <BarChart
                   data={stats.barChartData}
                   layout="vertical"
-                  margin={{
-                    top: 10,
-                    right: 30,
-                    left: 200,
-                    bottom: 10,
-                  }}
+                  margin={{ top: 10, right: 30, left: 200, bottom: 10 }}
                 >
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="#f0f0f0"
-                  />
-                  <XAxis
-                    type="number"
-                    stroke="#9ca3af"
-                    tick={{ fontSize: 12 }}
-                  />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis type="number" stroke="#9ca3af" tick={{ fontSize: 12 }} />
                   <YAxis
                     type="category"
                     dataKey="name"
