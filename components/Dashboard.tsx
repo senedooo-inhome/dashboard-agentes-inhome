@@ -197,7 +197,7 @@ const PAUSAS_LINKS: Record<string, string> = {
   '302': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=20507821&single=true',
   '303': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=756664457&single=true',
   '305': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2051629859&single=true',
-  '306': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=813749059&single=true',
+  '306': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1248875658&single=true',
   '308': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=102503259&single=true',
   '309': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2136482759&single=true',
   '310': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=2023513968&single=true',
@@ -214,7 +214,7 @@ const PAUSAS_LINKS: Record<string, string> = {
   '327': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1194403721&single=true',
   '328': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1363807707&single=true',
 
-  '359': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1248875658&single=true',
+  '359': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=813749059&single=true',
   '360': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1482604308&single=true',
   '362': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1848106607&single=true',
   '363': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=383124424&single=true',
