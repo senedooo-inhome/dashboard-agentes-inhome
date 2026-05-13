@@ -209,6 +209,7 @@ const PAUSAS_LINKS: Record<string, string> = {
   '318': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=64832934&single=true',
   '320': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1974371585&single=true',
   '322': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1542996410&single=true',
+  '323': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=151352378&single=true',
   '325': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=433543390&single=true',
   '326': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=91194220&single=true',
   '327': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRR3IeTTm7Lh2Xed2y0nrRp4iqtdp2tDcVWgS3nJ1vRNFNN4Y8nowZuHIDJyXWJLYD-4kCuUqkKOVxS/pubhtml?gid=1194403721&single=true',
